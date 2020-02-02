@@ -22,7 +22,7 @@
     ]
   },
   {
-    "name": "iCloud Bypass (pre) 13.3",
+    "name": "Remove setup.app (pre) 13.3",
     "description": "Will remove the setup.app. This bypass most likely will not work on 13.3+.",
     "author": "J0113",
     "actions": [
