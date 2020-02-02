@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Respring",
+    "description": "Respring your Device.",
+    "author": "J0113",
+    "actions": [
+      {
+        "type": "command",
+        "command": "killall backboardd"
+      }
+    ]
+  },
+  {
+    "name": "UIcache",
+    "description": "Clear the UIcache.",
+    "author": "J0113",
+    "actions": [
+      {
+        "type": "command",
+        "command": "uicache --all"
+      }
+    ]
+  },
+  {
+    "name": "iCloud Bypass (pre) 13.3",
+    "description": "Will remove the setup.app. This bypass most likely will not work on 13.3+.",
+    "author": "J0113",
+    "actions": [
+      {
+        "type": "command",
+        "command": "mount -o rw,union,update /"
+      },
+      {
+        "type": "command",
+        "command": "mv /Applications/Setup.app /Applications/Setup.app.bak"
+      },
+      {
+        "type": "command",
+        "command": "uicache --all"
+      },
+      {
+        "type": "command",
+        "command": "killall backboardd"
+      }
+    ],
+    "revert": [
+      {
+        "type": "command",
+        "command": "mount -o rw,union,update /"
+      },
+      {
+        "type": "command",
+        "command": "mv /Applications/Setup.app.bak /Applications/Setup.app"
+      },
+      {
+        "type": "command",
+        "command": "uicache --all"
+      },
+      {
+        "type": "command",
+        "command": "killall backboardd"
+      }
+    ]
+  }
+]
