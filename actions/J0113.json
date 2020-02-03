@@ -22,8 +22,8 @@
     ]
   },
   {
-    "name": "Remove setup.app (pre) 13.3",
-    "description": "Will remove the setup.app. This bypass most likely will not work on 13.3+.",
+    "name": "Remove Setup .app (pre) 13.3",
+    "description": "Will remove the setup.app. This will most likely will not work on 13.3+.",
     "author": "J0113",
     "actions": [
       {
@@ -59,6 +59,144 @@
       {
         "type": "command",
         "command": "killall backboardd"
+      }
+    ]
+  },
+  {
+    "name": "Disable SSL Validation.",
+    "description": "Allow Man in the Middle attack's within Apple apps including setup.app. Use with mimt proxy to debug any traffic. Install substrate, preferance loader and safemode first!",
+    "author": "J0113",
+    "actions": [
+      {
+        "type": "getonlinefile",
+        "location": "https://github.com/nabla-c0d3/ssl-kill-switch2/releases/download/0.14/com.nablac0d3.sslkillswitch2_0.14.deb",
+        "destination": "com.nablac0d3.sslkillswitch2_0.14.deb",
+        "cache": true
+      },
+      {
+        "type": "putfile",
+        "location": "com.nablac0d3.sslkillswitch2_0.14.deb",
+        "destination": "com.nablac0d3.sslkillswitch2_0.14.deb"
+      },
+      {
+        "type": "command",
+        "command": "dpkg -i sslkillswitchv13.deb"
+      },
+      {
+        "type": "command",
+        "command": "rm -f sslkillswitchv13.deb"
+      },
+      {
+        "type": "command",
+        "command": "killall -HUP SpringBoard"
+      }
+    ],
+    "revert": [
+      {
+        "type": "command",
+        "command": "dpkg -r com.jonluca.sslkillswitch2"
+      }
+    ]
+  },
+  {
+    "name": "Install mobilesubstrate, preferenceloader and safemode.",
+    "description": "Most tweaks depend on these packages. Install them without touching cydia!",
+    "author": "J0113",
+    "actions": [
+      {
+        "type": "getonlinefile",
+        "location": "http://apt.thebigboss.org/repofiles/cydia/debs2.0/preferenceloader_2.2.3-3.deb",
+        "destination": "preferenceloader_2.2.3-3.deb",
+        "cache": true
+      },
+      {
+        "type": "getonlinefile",
+        "location": "https://apt.bingner.com/debs/1443.00/mobilesubstrate_0.9.7100_iphoneos-arm.deb",
+        "destination": "mobilesubstrate_0.9.7100_iphoneos-arm.deb",
+        "cache": true
+      },
+      {
+        "type": "getonlinefile",
+        "location": "https://apt.bingner.com/debs/1443.00/com.saurik.substrate.safemode_0.9.6003_iphoneos-arm.deb",
+        "destination": "com.saurik.substrate.safemode_0.9.6003_iphoneos-arm.deb",
+        "cache": true
+      },
+      {
+        "type": "command",
+        "command": "mkdir packages"
+      },
+      {
+        "type": "putfile",
+        "location": "mobilesubstrate_0.9.7100_iphoneos-arm.deb",
+        "destination": "packages/mobilesubstrate_0.9.7100_iphoneos-arm.deb"
+      },
+      {
+        "type": "putfile",
+        "location": "com.saurik.substrate.safemode_0.9.6003_iphoneos-arm.deb",
+        "destination": "packages/com.saurik.substrate.safemode_0.9.6003_iphoneos-arm.deb"
+      },
+      {
+        "type": "putfile",
+        "location": "preferenceloader_2.2.3-3.deb",
+        "destination": "packages/preferenceloader_2.2.3-3.deb"
+      },
+      {
+        "type": "command",
+        "command": "dpkg -i --force-all packages/*.deb"
+      },
+      {
+        "type": "command",
+        "command": "rm -rf packages"
+      },
+      {
+        "type": "command",
+        "command": "killall -9 backboardd"
+      }
+    ],
+    "revert": [
+      {
+        "type": "command",
+        "command": "dpkg -r preferenceloader"
+      },
+      {
+        "type": "command",
+        "command": "dpkg -r com.saurik.substrate.safemode"
+      },
+      {
+        "type": "command",
+        "command": "dpkg -r mobilesubstrate"
+      },
+      {
+        "type": "command",
+        "command": "killall -9 backboardd"
+      }
+    ]
+  },
+  {
+    "name": "Install 'open'.",
+    "description": "Allow's opening applications from the terminal.",
+    "author": "J0113",
+    "actions": [
+      {
+        "type": "getonlinefile",
+        "location": "https://github.com/J0113/sn0wtool/blob/master/dl/open?raw=true",
+        "destination": "app_opener",
+        "cache": true
+      },
+      {
+        "type": "putfile",
+        "location": "app_opener",
+        "destination": "/usr/bin/open"
+      },
+      {
+        "type": "command",
+        "command": "chmod 755 /usr/bin/open"
+      }
+    ],
+    "revert": [
+      {
+        "type": "command",
+        "command": "rm -f /usr/bin/open"
       }
     ]
   }
