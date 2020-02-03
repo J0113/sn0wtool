@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Example Action",
+    "description": "This is an example action.",
+    "author": "YourName",
+    "actions": [
+      {
+        "type": "command",
+        "command": "killall backboardd"
+      },
+      {
+        "type": "putfile",
+        "location": "local/path/file.txt",
+        "destination": "were/to/store/file/remotely/file.txt"
+      },
+      {
+        "type": "getfile",
+        "location": "remote/file/path/file.txt",
+        "destination": "were/to/store/file/locally/file.txt"
+      },
+      {
+        "type": "getonlinefile",
+        "location": "https://example.com/",
+        "destination": "were/to/store/file/locally/file.txt"
+      },
+      {
+        "type": "message",
+        "message": "This is a message. The script will pause until the user clicks OK."
+      }
+    ],
+    "revert": [
+      {
+        "type": "command",
+        "command": "killall backboardd"
+      },
+      {
+        "type": "message",
+        "message": "Reverted!."
+      }
+    ]
+  },
+  {
+    "name": "Action without revert",
+    "description": "This action doesn't have a revert script.",
+    "author": "YourName",
+    "actions": [
+      {
+        "type": "command",
+        "command": "killall backboardd"
+      },
+      {
+        "type": "message",
+        "message": "This is a message."
+      }
+    ]
+  }
+]
